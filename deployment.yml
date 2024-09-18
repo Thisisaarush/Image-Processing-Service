@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-processing-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: image-processing-service
+  template:
+    metadata:
+      labels:
+        app: image-processing-service
+    spec:
+      containers:
+        - name: app
+          image: image-processing-service:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo:27017/image-service"
+            - name: REDIS_HOST
+              value: "redis"
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: AWS_ACCESS_KEY
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: AWS_SECRET_KEY
+            - name: S3_BUCKET
+              value: "your_bucket_name"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_SECRET
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-processing-service
+spec:
+  selector:
+    app: image-processing-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

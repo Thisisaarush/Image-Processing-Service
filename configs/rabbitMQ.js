@@ -1,7 +1,11 @@
 const amqb = require("amqplib/callback_api")
+const { transformImage } = require("../images/imageService")
 
 const connectToRabbitMQ = () => {
-  amqb.connect("amqp://localhost", (err, connection) => {
+  // Connect to RabbitMQ server
+  const amqpUrl = process.env.RABBITMQ_URL || "amqp://localhost"
+
+  amqb.connect(amqpUrl, (err, connection) => {
     if (err) {
       console.error("Failed to connect to RabbitMQ", err)
       return
@@ -9,6 +13,7 @@ const connectToRabbitMQ = () => {
 
     console.log("Connected to RabbitMQ Successfully 🚀")
 
+    // Create a channel to communicate with queue
     connection.createChannel((err, channel) => {
       if (err) {
         console.error("Failed to create channel", err)
@@ -20,14 +25,20 @@ const connectToRabbitMQ = () => {
       channel.assertQueue(queue, {
         durable: true,
       })
+
+      // Consume messages from the queue
       channel.consume(queue, async (message) => {
-        const { id, transformations } = JSON.parse(message.content.toString())
-        console.log(`Processing image with id: ${id}`)
-
-        // todo: Process the image here
-
-        channel.ack(message)
+        try {
+          const { id, transformations } = JSON.parse(message.content.toString())
+          console.log(`Processing image with id: ${id}`)
+          await transformImage(id, transformations)
+          channel.ack(message)
+        } catch (error) {
+          console.error("Failed to process image", error)
+          channel.reject(message, true)
+        }
       })
+      console.log("Waiting for messages in the image_processing queue...")
     })
   })
 }
