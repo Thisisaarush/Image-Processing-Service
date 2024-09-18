@@ -15,9 +15,12 @@
     "amqplib": "^0.10.4",
     "argon2": "^0.41.1",
     "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.3",
     "multer": "^1.4.5-lts.1",
+    "rate-limit-redis": "^4.2.0",
+    "redis": "^4.7.0",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
