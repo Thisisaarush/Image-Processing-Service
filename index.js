@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const redisClient = require("./configs/redis")
 const connectToRabbitMQ = require("./configs/rabbitMQ")
 const authRoutes = require("./auth/authRoutes")
+const imageRoutes = require("./images/imageRoutes")
 
 const PORT = process.env.PORT || 5000
 const app = express()
@@ -11,6 +12,7 @@ app.use(express.json())
 
 // Routes
 app.use("/auth", authRoutes)
+app.use("/images", imageRoutes)
 
 // Connect to MongoDB and start the server
 mongoose
