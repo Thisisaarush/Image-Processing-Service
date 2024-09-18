@@ -24,7 +24,9 @@ mongoose
     console.log("Connected to MongoDB Successfully 🚀")
 
     // Connect to Redis and RabbitMQ
-    // redisClient.connect()
+    redisClient.on("connect", () => {
+      console.log("Connected to Redis Successfully 🚀")
+    })
     // connectToRabbitMQ()
 
     app.listen(PORT, () => {
