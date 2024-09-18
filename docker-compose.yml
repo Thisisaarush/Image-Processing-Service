@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     environment:
@@ -15,6 +17,9 @@ services:
       - RABBITMQ_URL=${RABBITMQ_URL}
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
+    volumes:
+      - .:/app
+      - /app/node_modules
     depends_on:
       - mongo
       - rabbitmq
