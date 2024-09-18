@@ -82,14 +82,14 @@ const deleteImageController = async (req, res) => {
 
 const listImagesController = async (req, res) => {
   try {
-    const { id } = req.user
+    const { userId } = req
     const { page, limit } = req.query
 
-    if (!id) {
-      return res.status(400).json({ message: "Id is required" })
+    if (!userId) {
+      return res.status(400).json({ message: "userId is required" })
     }
 
-    const images = await listImages(id, page, limit)
+    const images = await listImages(userId, page, limit)
     res.status(200).json({ images, message: "Images listed successfully" })
   } catch (error) {
     res

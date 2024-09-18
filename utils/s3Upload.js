@@ -5,6 +5,9 @@ const {
   DeleteObjectCommand,
 } = require("@aws-sdk/client-s3")
 const fs = require("fs")
+const dotenv = require("dotenv")
+
+dotenv.config()
 
 // Initialize S3 client
 const s3Client = new S3Client({

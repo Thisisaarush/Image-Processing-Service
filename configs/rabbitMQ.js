@@ -1,11 +1,9 @@
-const amqb = require("amqplib/callback_api")
+const amqp = require("amqplib/callback_api")
 const { transformImage } = require("../images/imageService")
 
 const connectToRabbitMQ = () => {
   // Connect to RabbitMQ server
-  const amqpUrl = process.env.RABBITMQ_URL || "amqp://localhost"
-
-  amqb.connect(amqpUrl, (err, connection) => {
+  amqp.connect("amqp://host.docker.internal", (err, connection) => {
     if (err) {
       console.error("Failed to connect to RabbitMQ 🚫", err)
       return

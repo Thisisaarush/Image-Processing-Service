@@ -1,13 +1,17 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const dotenv = require("dotenv")
 const redisClient = require("./configs/redis")
 const connectToRabbitMQ = require("./configs/rabbitMQ")
 const authRoutes = require("./auth/authRoutes")
 const imageRoutes = require("./images/imageRoutes")
 
+dotenv.config()
+
 const PORT = process.env.PORT || 5000
 const app = express()
 
+// Middlewares
 app.use(express.json())
 
 // Routes
@@ -27,7 +31,7 @@ mongoose
     redisClient.on("connect", () => {
       console.log("Connected to Redis Successfully 🚀")
     })
-    // connectToRabbitMQ()
+    connectToRabbitMQ()
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)

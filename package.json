@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "dev:docker": "docker compose up --build",
+    "delete:docker": "docker compose down --rmi all --volumes"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
     "@aws-sdk/client-s3": "^3.651.1",
     "amqplib": "^0.10.4",
     "argon2": "^0.41.1",
+    "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "express-rate-limit": "^7.4.0",
     "jsonwebtoken": "^9.0.2",

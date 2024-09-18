@@ -2,6 +2,9 @@ const User = require("../models/user")
 const argon2 = require("argon2")
 const jwt = require("jsonwebtoken")
 const user = require("../models/user")
+const dotenv = require("dotenv")
+
+dotenv.config()
 
 const register = async (req, res) => {
   const { email, password } = req.body
@@ -48,7 +51,10 @@ const login = async (req, res) => {
       expiresIn: "1h",
     })
 
-    res.status(200).json({ token, message: "Login successful" })
+    res.status(200).json({
+      token,
+      message: "Login successful",
+    })
   } catch (err) {
     return res.status(401).json({ error: "Failed to login", err })
   }
