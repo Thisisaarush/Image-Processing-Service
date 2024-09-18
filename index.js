@@ -24,8 +24,8 @@ mongoose
     console.log("Connected to MongoDB Successfully 🚀")
 
     // Connect to Redis and RabbitMQ
-    redisClient.connect()
-    connectToRabbitMQ()
+    // redisClient.connect()
+    // connectToRabbitMQ()
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
