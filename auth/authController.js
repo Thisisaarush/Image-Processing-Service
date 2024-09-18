@@ -7,6 +7,13 @@ const register = async (req, res) => {
   const { email, password } = req.body
 
   try {
+    const userExits = await User.findOne({ email })
+    if (userExits) {
+      return res
+        .status(400)
+        .json({ error: "User with this email already exists" })
+    }
+
     const hashedPassword = await argon2.hash(password)
     const user = new User({ email, password: hashedPassword })
     await user.save()

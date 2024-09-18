@@ -7,7 +7,7 @@ const connectToRabbitMQ = () => {
 
   amqb.connect(amqpUrl, (err, connection) => {
     if (err) {
-      console.error("Failed to connect to RabbitMQ", err)
+      console.error("Failed to connect to RabbitMQ 🚫", err)
       return
     }
 
