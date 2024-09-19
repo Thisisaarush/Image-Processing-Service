@@ -6,6 +6,7 @@ const dotenv = require("dotenv")
 
 dotenv.config()
 
+// Register a new user
 const register = async (req, res) => {
   const { email, password } = req.body
 
@@ -31,6 +32,7 @@ const register = async (req, res) => {
   }
 }
 
+// Login a user
 const login = async (req, res) => {
   const { email, password } = req.body
 
@@ -47,7 +49,7 @@ const login = async (req, res) => {
       return res.status(401).json({ error: "Wrong password" })
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: userExits._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     })
 

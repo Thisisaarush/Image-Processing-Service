@@ -31,7 +31,14 @@ The Image upload service allows users to upload, retrive, delete, transform imag
 - Run the following command to start the services:
 
 ```bash
-  docker compose up --build
+  npm run dev:docker
+```
+
+- When installing new dependencies, you can run the following command to remove the existing containers, images & volumes and start the services:
+
+```bash
+  npm run delete:docker
+  npm run dev:docker
 ```
 
 ## Local Development without Docker
@@ -66,4 +73,8 @@ The Image upload service allows users to upload, retrive, delete, transform imag
 
 ```bash
   kubectl apply -f secrets.yaml
+```
+
+```
+
 ```

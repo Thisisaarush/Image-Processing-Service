@@ -9,13 +9,13 @@ const {
 const uploadImageController = async (req, res) => {
   try {
     const { file } = req
-    const { id } = req.user
+    const userId = req.userId
 
-    if (!file || !id) {
-      return res.status(400).json({ message: "File and Id are required" })
+    if (!file || !userId) {
+      return res.status(400).json({ message: "File and userId are required" })
     }
 
-    const imageUrl = await uploadImage(file, id)
+    const imageUrl = await uploadImage(file, userId)
     res.status(201).json({ imageUrl, message: "Image uploaded successfully" })
   } catch (error) {
     res
