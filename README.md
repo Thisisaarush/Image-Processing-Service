@@ -8,7 +8,6 @@ The Image upload service allows users to upload, retrive, delete, transform imag
 - Upload, Retrive, Delete, List images to/from AWS S3
 - Transform images using Sharp library
 - Cache transformed images using Redis
-- Rate limiting using Redis
 - Using RabbitMQ for async processing (Transforming images)
 - Docker and Docker-compose for containerization
 - Using Kubernetes for deployment

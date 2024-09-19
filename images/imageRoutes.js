@@ -1,7 +1,6 @@
 const express = require("express")
 const authMiddleware = require("../auth/authMiddleware")
 const multer = require("multer")
-// const { uploadLimiter, transformLimiter } = require("../utils/rateLimit")
 const {
   uploadImageController,
   transformImageController,
@@ -19,16 +18,10 @@ router.get("/:id", getImageController)
 router.post(
   "/upload",
   authMiddleware,
-  // uploadLimiter,
   upload.single("image"),
   uploadImageController
 )
-router.post(
-  "/transform/:id",
-  authMiddleware,
-  // transformLimiter,
-  transformImageController
-)
+router.post("/transform/:id", authMiddleware, transformImageController)
 router.delete("/:id", authMiddleware, deleteImageController)
 
 module.exports = router
