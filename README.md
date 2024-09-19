@@ -73,7 +73,3 @@ The Image upload service allows users to upload, retrive, delete, transform imag
 ```bash
   kubectl apply -f secrets.yaml
 ```
-
-```
-
-```
